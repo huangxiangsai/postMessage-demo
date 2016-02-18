@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<title>Demo postMessage Sender</title>
+	<style>
+		body{
+			width: 100%;
+		}
+
+		.page {
+			width: 640px;
+			margin : 0 auto;
+			padding-top: 20px;
+		}
+
+		.fl {
+			position: relative;
+			float: left;
+		}
+		.mgl {
+			margin-left: 20px;
+		}
+
+		.cl{
+			clear: both;
+		}
+
+		.mgt{
+			margin-top: 15px;
+		}
+
+		#receiver {
+			border: 1px #eeeeee solid;
+		}
+
+	</style>
+</head>
+<body>
+
+	<div class="page ">
+
+		<h3>iframe信息通信</h3>
+		<div class="fl ">
+			<label>1信息：</label>
+			<input type="text" placeholder="输入信息" id="sendInput">
+		</div>
+		<button class="mgl " onclick="send();">点击发送</button>
+
+		
+		
+		<div class="cl mgt">
+			<label>返回的信息：</label>
+			<span id="getData"></span>
+		</div>
+		
+		<br>
+
+		<iframe id="receiver" src="http://demo.sai.com:8081/receiver.html" width="500" height="200">
+		  <p>Your browser does not support iframes.</p>
+		</iframe>
+
+		<h3>与window、tabs之间信息通信</h3>
+		<div class=" ">
+			<label>2信息：</label>
+			<input type="text" placeholder="输入信息" id="sendInput2">
+		</div>
+		<div class="cl mgt">
+			<label>点击按钮打开新窗口:</label>
+			<button class="mgl " onclick="sendWindow();">点击发送</button>
+		</div>
+		<div class="cl mgt">
+			<label>新窗口返回的信息：</label>
+			<span id="getData2"></span>
+		</div>
+		
+		
+	</div>
+
+	<script type="text/javascript">
+
+		var receiver = document.getElementById('receiver').contentWindow;
+
+		function send (e) {
+			var value = document.getElementById('sendInput').value;
+			if('postMessage' in receiver){
+				receiver.postMessage( {input : 'getData', value : value} , 'http://demo.sai.com:8081');	
+			}
+		}
+
+
+		window.addEventListener('message', function(e) {
+			var data = e.data;
+			var result ;
+			if(data.input == 'getData'){
+				result = document.getElementById('getData');
+			}else if(data.inout == 'getData2'){
+				result = document.getElementById('getData2');
+			}
+			result.innerHTML = data.value;
+		});
+
+		function sendWindow(){
+			var value = document.getElementById('sendInput2').value;
+			var new_w = window.open('http://demo.sai.com:8081/receiver.html');
+			new_w.postMessage( {input : 'getData2', value : value} , 'http://demo.sai.com:8081');	
+		}
+
+	</script>
+</body>
+</html>
