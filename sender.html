@@ -56,7 +56,7 @@
 		
 		<br>
 
-		<iframe id="receiver" src="http://demos.devsai.com/postmessage/receiver.html" width="500" height="200">
+		<iframe id="receiver" src="http://demo.sai.com:8081/receiver.html" width="500" height="200">
 		  <p>Your browser does not support iframes.</p>
 		</iframe>
 
@@ -84,7 +84,7 @@
 		function send (e) {
 			var value = document.getElementById('sendInput').value;
 			if('postMessage' in receiver){
-				receiver.postMessage( {input : 'getData', value : value} , 'http://demos.devsai.com');	
+				receiver.postMessage( {input : 'getData', value : value} , 'http://demo.sai.com:8081');	
 			}
 		}
 
@@ -102,8 +102,8 @@
 
 		function sendWindow(){
 			var value = document.getElementById('sendInput2').value;
-			var new_w = window.open('http://demos.devsai.com/postmessage/receiver.html');
-			new_w.postMessage( {input : 'getData2', value : value} , 'http://demos.devsai.com');	
+			var new_w = window.open('http://demo.sai.com:8081/receiver.html');
+			new_w.postMessage( {input : 'getData2', value : value} , 'http://demo.sai.com:8081');	
 		}
 
 	</script>
