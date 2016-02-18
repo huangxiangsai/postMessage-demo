@@ -19,4 +19,4 @@
   127.0.0.1 demo.sai.com
 ```
 
-最后在浏览器中访问www.sai.com/sender.html查看demo
+最后在浏览器中访问www.sai.com:8080/sender.html查看demo
