@@ -100,10 +100,23 @@
 			result.innerHTML = data.value;
 		});
 
+		var new_w;
+
+		var w_params = 'height=380,width=440,left=100,top=100';
+
 		function sendWindow(){
 			var value = document.getElementById('sendInput2').value;
-			var new_w = window.open('http://demo.sai.com:8081/receiver.html');
-			new_w.postMessage( {input : 'getData2', value : value} , 'http://demo.sai.com:8081');	
+			var send2 = function() {
+				new_w.postMessage( {input : 'getData2', value : value} , 'http://demo.sai.com:8081');	
+			};
+
+			if(new_w && !new_w.closed){
+				send2();
+			}else{
+				new_w = window.open('http://demo.sai.com:8081/receiver.html','',w_params);
+				//等待页面加载完再发送信息
+				setTimeout(send2, 1000);
+			}
 		}
 
 	</script>
