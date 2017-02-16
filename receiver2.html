@@ -19,9 +19,6 @@
 
 	</div>
 	
-	<div> 
-		<button onclick="gotoReceiver2();"> goTo Receiver2 </button>
-	</div>
 
 	<script type="text/javascript">
 	var count = 0;
@@ -36,13 +33,10 @@
 				input : e.data.input,
 				value : '来自demos.devsai.com的第'+(++count)+'次回复信息'
 			}
+      console.log(e.source);
 			e.source.postMessage(result, e.origin);
 		});
-
-		function gotoReceiver2(){
-			window.location.href = 'receiver2.html';
-		}
-
+console.log(window.top.postMessage({input : 'getData' ,value:'demos.devisa.com receiver2.thml'},'http://www.sai.com:8081'));
 	</script>
 </body>
 </html>
